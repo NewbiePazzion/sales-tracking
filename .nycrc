@@ -1,0 +1,10 @@
+{
+  "exclude": [
+    "test",
+    "src/fixtures",
+    "src/validations",
+    ".mocharc.js",
+    "**/*.constants.js",
+    "**/*.fixture.js"
+  ]
+}

@@ -1,0 +1,34 @@
+name: deploy
+
+on:
+  push:
+    branches: [ develop ]  
+jobs:  
+  deploy:    
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [10.x]
+    
+    steps:
+    - uses: actions/checkout@v2    
+    - name: deploy
+      uses: fifsky/ssh-action@master
+      with:
+        command: |
+          cd /var/www/agrix-api
+          git pull origin develop          
+          npm ci          
+          npm run build
+          sudo chown -R developer:sudo /var/www/agrix-api
+          npm install -g sequelize-cli          
+          sequelize db:migrate
+          pm2 restart AGRIX-API
+          pm2 reload AGRIX-API
+          npm sequelize -v
+          pm2 -v
+        host: ${{ secrets.HOST }}
+        user: ${{ secrets.USERNAME}}
+        key: ${{ secrets.SSH}}
+        port: ${{ secrets.PORT}}    
