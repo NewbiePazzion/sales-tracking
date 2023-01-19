@@ -14,7 +14,7 @@
     "babel-node": "babel-node",
     "start": "npm run babel-node -- ./src/index.js",
     "dev": "cross-env NODE_ENV=dev nodemon --exec babel-node ./src/index.js",
-    "build": "rimraf dist/ && babel ./ --out-dir dist/ && cp firebase.config.json dist/",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/",
     "test:unit": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha test/unit/**/*.test.js",
     "test": "npm run test:unit",
     "lint": "eslint ./src/ --ignore-path .eslintignore",
