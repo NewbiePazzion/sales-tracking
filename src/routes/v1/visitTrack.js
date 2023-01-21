@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
-import { VisitTrack } from '../../models';
+import { VisitTrack, User } from '../../models';
 import VisitTrackController from '../../api/visitTrack';
 import VisitTrackService from '../../services/visitTrackService';
 import { API_VISIT_TRACK } from '../../fixtures/api';
 
 const routes = Router();
-const visitTrackService = VisitTrackService({ VisitTrack });
+const visitTrackService = VisitTrackService({ VisitTrack, User });
 const controller = VisitTrackController({ visitTrackService });
 
 routes

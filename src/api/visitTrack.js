@@ -20,6 +20,7 @@ const VisitTrackController = (services) => {
     if (req.query.ID) filter.ID = req.query.ID;
     if (req.query.Start) filter.Start = req.query.Start;
     if (req.query.End) filter.End = req.query.End;
+    if (req.query.Name) filter.Name = req.query.Name;
     if (req.query.search) filter.search = req.query.search;
 
     try {

@@ -4,7 +4,7 @@ import { VISIT_TRACK_TABLE_NAME } from '../fixtures/models';
 import { getSequelizeError } from '../utils/errorHelper';
 
 const VisitTrackService = (models) => {
-  const { VisitTrack } = models;
+  const { VisitTrack, User } = models;
 
   /**
    * Get list of visit track
@@ -19,6 +19,7 @@ const VisitTrackService = (models) => {
    */
   const getAllData = async (filter) => {
     const where = {};
+    let whereUser = {};
     if (filter) {
       if (filter.CaeCd) {
         where.CaeCd = { [Op.iLike]: `%${filter.CaeCd}%` };
@@ -35,9 +36,26 @@ const VisitTrackService = (models) => {
       if (filter.End) {
         where.VstTm = { ...where.VstTm, [Op.lte]: filter.End };
       }
+      if (filter.Name) {
+        whereUser = { [Op.or]: [{ Fullname: { [Op.iLike]: `%${filter.Name}%` } }, { ShortName: { [Op.iLike]: `%${filter.Name}%` } }] };
+      }
       if (filter.search) {
         where.name = { [Op.iLike]: `%${filter.search}%` };
       }
+    }
+
+    let user = [];
+    try {
+      user = await User.findAll({ where: whereUser });
+    } catch (error) {
+      const seqError = getSequelizeError(error, VISIT_TRACK_TABLE_NAME);
+      throw seqError;
+    }
+
+    let usernames = [];
+    if (user.length) {
+      usernames = user.map((u) => u.Username);
+      where.CaeCd = usernames;
     }
 
     let allData = null;
