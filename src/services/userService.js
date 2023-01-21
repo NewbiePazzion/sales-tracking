@@ -20,6 +20,12 @@ const UserService = (models) => {
   const getAllData = async (filter) => {
     const where = {};
     if (filter) {
+      if (filter.StaffCode) {
+        where.StaffCode = filter.StaffCode;
+      }
+      if (filter.Username) {
+        where.Username = filter.Username;
+      }
       if (filter.search) {
         where.name = { [Op.iLike]: `%${filter.search}%` };
       }

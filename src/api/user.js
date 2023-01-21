@@ -15,6 +15,8 @@ const UserController = (services) => {
    */
   const getAll = async (req, res, next) => {
     const filter = {};
+    if (req.query.StaffCode) filter.StaffCode = req.query.StaffCode;
+    if (req.query.Username) filter.Username = req.query.Username;
     if (req.query.search) filter.search = req.query.search;
 
     try {
