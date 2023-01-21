@@ -14,6 +14,7 @@ const ProjectNameController = (services) => {
   const getAll = async (req, res, next) => {
     const filter = {};
     if (req.query.proj_year) filter.proj_year = req.query.proj_year;
+    if (req.query.loc_ty) filter.loc_ty = req.query.loc_ty;
     if (req.query.search) filter.search = req.query.search;
 
     try {

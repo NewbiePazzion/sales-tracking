@@ -23,6 +23,9 @@ const ProjectNameService = (models) => {
       if (filter.proj_year) {
         where.proj_year = filter.proj_year;
       }
+      if (filter.loc_ty) {
+        where.loc_ty = filter.loc_ty;
+      }
       if (filter.search) {
         where.name = { [Op.iLike]: `%${filter.search}%` };
       }
