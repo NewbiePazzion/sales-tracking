@@ -20,7 +20,7 @@ const AuthController = (services) => {
       // sign token
       const token = await authService.signToken({ ...user });
 
-      return res.send(token);
+      return res.send({ ...token, UserCode: user.Username, Username: user.Username, BranchCode: '00' });
     })(req, res)
   );
 
