@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
 
 import { USER_TABLE_NAME } from '../fixtures/models';
@@ -25,6 +26,9 @@ const UserService = (models) => {
       }
       if (filter.Username) {
         where.Username = filter.Username;
+      }
+      if (filter.Role) {
+        where.Role = filter.Role;
       }
       if (filter.search) {
         where.name = { [Op.iLike]: `%${filter.search}%` };
@@ -92,6 +96,10 @@ const UserService = (models) => {
    */
   const updateData = async (id, data) => {
     const user = { ...data };
+    if (user.Password) {
+      // user.Password = await bcrypt.hash(user.Password, 10);
+      user.Password = bcrypt.hashSync(user.Password, bcrypt.genSaltSync(8));
+    }
     let updatedUser = null;
 
     try {
@@ -111,7 +119,26 @@ const UserService = (models) => {
     return updatedUser[0];
   };
 
-  return { getAllData, createData, updateData };
+  /**
+   * Remove a user account
+   *
+   * @param {Integer} id User's id
+   *
+   * @return {Object}
+   *
+   */
+  const removeData = async (id) => {
+    try {
+      await User.destroy({ where: { StaffCode: id } });
+    } catch (error) {
+      const seqError = getSequelizeError(error);
+      throw seqError;
+    }
+
+    return true;
+  };
+
+  return { getAllData, createData, updateData, removeData };
 };
 
 export default UserService;

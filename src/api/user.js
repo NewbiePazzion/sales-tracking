@@ -17,6 +17,7 @@ const UserController = (services) => {
     const filter = {};
     if (req.query.StaffCode) filter.StaffCode = req.query.StaffCode;
     if (req.query.Username) filter.Username = req.query.Username;
+    if (req.query.Role) filter.Role = req.query.Role;
     if (req.query.search) filter.search = req.query.search;
 
     try {
@@ -71,7 +72,30 @@ const UserController = (services) => {
     }
   };
 
-  return { getAll, create, update };
+  /**
+   * Remove user
+   *
+   * @param {Request} req HTTP request
+   * @param {Response} res HTTP response
+   * @param {NextFunction} next Next function
+   *
+   * @return {any}
+   *
+   */
+  const remove = async (req, res, next) => {
+    try {
+      // const user = await userService.updateData(req.params.id, req.body);
+      await userService.removeData(req.params.id);
+      return res.status(httpStatus.OK).send({
+        message: 'Success delete account!',
+        // data: user,
+      });
+    } catch (err) {
+      return next(err);
+    }
+  };
+
+  return { getAll, create, update, remove };
 };
 
 export default UserController;

@@ -12,6 +12,7 @@ import projectHomeRoutes from './projectHome';
 import masterDataRoutes from './masterData';
 import visitTrackRoutes from './visitTrack';
 // import JwtAuthMiddleware from '../../middlewares/jwtAuth';
+// import DateTimeLog from '../../middlewares/dateTimeLog';
 
 // API ROUTER
 const apiRouter = Router();
@@ -20,6 +21,8 @@ const apiRouter = Router();
 
 // APP ROUTER
 const router = Router();
+
+// router.use(DateTimeLog());
 
 router.get(API_STATUS, (req, res) => res.send('OK'));
 

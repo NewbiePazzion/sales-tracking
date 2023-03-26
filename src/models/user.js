@@ -25,6 +25,9 @@ const schemaAttributes = {
   Password: {
     allowNull: false,
     type: Sequelize.STRING,
+    // set(Password) {
+    //   this.setDataValue('Password', bcrypt.hashSync(Password, bcrypt.genSaltSync(8)));
+    // }
   },
   Role: {
     allowNull: false,
@@ -267,7 +270,7 @@ const usersModel = (sequelize) => {
     // eslint-disable-next-line no-param-reassign
     if (value.Username) value.Username = value.Username.toLowerCase();
     // eslint-disable-next-line no-param-reassign
-    if (value.Password) value.Password = bcrypt.hashSync(value.Password, bcrypt.genSaltSync(8));
+    // if (value.Password) value.Password = bcrypt.hashSync(value.Password, bcrypt.genSaltSync(8));
   });
 
   // eslint-disable-next-line func-names

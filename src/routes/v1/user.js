@@ -22,8 +22,8 @@ routes
   .route(API_USERS_WITH_ID)
   .put(controller.update);
 
-// routes
-//   .route(API_USERS_WITH_ID)
-//   .delete(controller.remove);
+routes
+  .route(API_USERS_WITH_ID)
+  .delete(controller.remove);
 
 export default routes;
