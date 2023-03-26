@@ -24,6 +24,22 @@ const records = [
     proj_year: 2022,
     loc_ty: 2,
   },
+  {
+    proj_id: 'P1700365',
+    proj_nm: 'Apt. Taman Kemayoran Condominium',
+    proj_year: 2023,
+    loc_ty: 99,
+  }, {
+    proj_id: 'P1900044',
+    proj_nm: 'Open Area RW10 Rawa Buaya',
+    proj_year: 2023,
+    loc_ty: 99,
+  }, {
+    proj_id: 'P1801275',
+    proj_nm: 'Summarecon Bekasi - partial 1-non lantai 3',
+    proj_year: 2023,
+    loc_ty: 2,
+  },
 ];
 
 const schemaOptions = {

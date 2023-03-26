@@ -8,7 +8,7 @@ import {
 const { database } = config('/');
 
 const records = [
-  { proj_year: 2022 }, { proj_year: 2021 }, { proj_year: 2020 }, { proj_year: 2019 },
+  { proj_year: 2023 }, { proj_year: 2022 }, { proj_year: 2021 }, { proj_year: 2020 }, { proj_year: 2019 },
 ];
 
 const schemaOptions = {
